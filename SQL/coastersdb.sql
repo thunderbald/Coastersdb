@@ -52,6 +52,58 @@ LOCK TABLES `coasters` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `employees`
+--
+
+DROP TABLE IF EXISTS `employees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `employees` (
+  `employeeID` int NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  `park_ID` int DEFAULT NULL,
+  PRIMARY KEY (`employeeID`),
+  KEY `parkID_idx` (`park_ID`),
+  CONSTRAINT `parkID` FOREIGN KEY (`park_ID`) REFERENCES `parks` (`parkID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `employees`
+--
+
+LOCK TABLES `employees` WRITE;
+/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
+/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `guests`
+--
+
+DROP TABLE IF EXISTS `guests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `guests` (
+  `guestID` int NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `phone` int DEFAULT NULL,
+  `passholder` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`guestID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `guests`
+--
+
+LOCK TABLES `guests` WRITE;
+/*!40000 ALTER TABLE `guests` DISABLE KEYS */;
+/*!40000 ALTER TABLE `guests` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `manufacturer`
 --
 
@@ -111,4 +163,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-10 14:02:19
+-- Dump completed on 2022-11-13 13:58:20
