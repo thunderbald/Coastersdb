@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.30, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
--- Host: localhost    Database: rollercoasters
+-- Host: localhost    Database: coastersdb
 -- ------------------------------------------------------
--- Server version	8.0.30
+-- Server version	8.0.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -52,58 +52,6 @@ LOCK TABLES `coasters` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `employees`
---
-
-DROP TABLE IF EXISTS `employees`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `employees` (
-  `employeeID` int NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `park_ID` int DEFAULT NULL,
-  PRIMARY KEY (`employeeID`),
-  KEY `parkID_idx` (`park_ID`),
-  CONSTRAINT `parkID` FOREIGN KEY (`park_ID`) REFERENCES `parks` (`parkID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `employees`
---
-
-LOCK TABLES `employees` WRITE;
-/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `guests`
---
-
-DROP TABLE IF EXISTS `guests`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `guests` (
-  `guestID` int NOT NULL,
-  `name` varchar(45) DEFAULT NULL,
-  `phone` int DEFAULT NULL,
-  `passholder` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`guestID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `guests`
---
-
-LOCK TABLES `guests` WRITE;
-/*!40000 ALTER TABLE `guests` DISABLE KEYS */;
-/*!40000 ALTER TABLE `guests` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `manufacturer`
 --
 
@@ -124,6 +72,7 @@ CREATE TABLE `manufacturer` (
 
 LOCK TABLES `manufacturer` WRITE;
 /*!40000 ALTER TABLE `manufacturer` DISABLE KEYS */;
+INSERT INTO `manufacturer` VALUES ('Goodrollers','Huntington','1910');
 /*!40000 ALTER TABLE `manufacturer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +88,6 @@ CREATE TABLE `parks` (
   `park_name` varchar(30) DEFAULT NULL,
   `location` varchar(45) DEFAULT NULL,
   `year_opened` int DEFAULT NULL,
-  `num_passholders` int DEFAULT NULL,
   `num_coasters` int DEFAULT NULL,
   PRIMARY KEY (`parkID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -151,7 +99,33 @@ CREATE TABLE `parks` (
 
 LOCK TABLES `parks` WRITE;
 /*!40000 ALTER TABLE `parks` DISABLE KEYS */;
+INSERT INTO `parks` VALUES (123,'Funpark','Charleston',NULL,NULL);
 /*!40000 ALTER TABLE `parks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `username` varchar(45) NOT NULL,
+  `user_type` enum('employee','guest') DEFAULT NULL,
+  `phone_number` int DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -163,4 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-13 13:58:20
+-- Dump completed on 2022-11-15 16:42:38
