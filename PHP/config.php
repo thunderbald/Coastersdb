@@ -1,13 +1,16 @@
 <?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
+/* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
-$link = mysqli_connect("localhost", "root", "");
+define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'password');
+define('DB_NAME', 'coastersdb');
+ 
+/* Attempt to connect to MySQL database */
+$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
  
 // Check connection
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
- 
-// Print host information
-echo "Connect Successfully. Host info: " . mysqli_get_host_info($link);
 ?>
