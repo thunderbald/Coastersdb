@@ -112,9 +112,7 @@ DROP TABLE IF EXISTS `users`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `username` varchar(45) NOT NULL,
-  `user_type` enum('employee','guest') DEFAULT NULL,
-  `phone_number` int DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL,
+  `password` varchar(45) NOT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -137,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-15 16:42:38
+-- Dump completed on 2022-11-16  9:47:55
