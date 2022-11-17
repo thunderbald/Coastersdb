@@ -2,7 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\PHP",
+    "\\PHP\\Coasters",
+    "\\PHP\\Manufacturer",
+    "\\PHP\\Parks",
     "\\SQL"
   ],
+  "SelectedNode": "\\PHP\\Parks",
   "PreviewInSolutionExplorer": false
 }

@@ -32,8 +32,7 @@ CREATE TABLE `coasters` (
   `year_closed` int DEFAULT NULL,
   `location` varchar(45) DEFAULT NULL,
   `park_ID` int DEFAULT NULL,
-  `comments` varchar(45) DEFAULT NULL,
-  `manufacturer` varchar(45) DEFAULT NULL,
+  `manufacturer` varchar(45) NOT NULL,
   PRIMARY KEY (`coasterID`),
   KEY `park_ID_idx` (`park_ID`),
   KEY `manufacturer_idx` (`manufacturer`),
@@ -123,6 +122,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES ('','$2y$10$vgiDgOJTBHD8D.rBBfyOtu5N.QysWpKcApQvos');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -135,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-16  9:47:55
+-- Dump completed on 2022-11-16 20:09:07
