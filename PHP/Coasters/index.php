@@ -1,18 +1,13 @@
-<?php
-/* Require Session and Login Start */
-// Copy and paste this section at the top of any page you want protected.
-// Initialize the session
-
-session_start();
-
-// Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
-/* Require Session and Login End */
+<<?php
+// Initialize the session                                                                                                                                              
+session_start();                                                                                                                                                       
+                                                                                                                                                                       
+// Check if the user is logged in, if not then redirect him to login page                                                                                              
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
+    header("location: ../login.php");                                                                                                                                     
+    exit;                                                                                                                                                              
+}    
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,12 +39,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
             <div class="row">
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
+                        <a href="../welcome.php" class="btn btn-primary pull-left mr-5"><i class="fa fa-home"></i></a>
                         <h2 class="pull-left">Employees Details</h2>
                         <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Employee</a>
                     </div>
                     <?php
                     // Include config file
-                    require_once "config.php";
+                    require_once "../config.php";
                     
                     // Attempt select query execution
                     $sql = "SELECT * FROM employees";
@@ -98,4 +94,4 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         </div>
     </div>
 </body>
-</html>
+</html>   

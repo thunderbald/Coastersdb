@@ -1,10 +1,18 @@
 <?php
+// Initialize the session                                                                                                                                              
+session_start();                                                                                                                                                       
+                                                                                                                                                                       
+// Check if the user is logged in, if not then redirect him to login page                                                                                              
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
+    header("location: ../login.php");                                                                                                                                     
+    exit;                                                                                                                                                              
+}    
 // Include config file
-require_once "config.php";
+require_once "../config.php";
  
 // Define variables and initialize with empty values
-$name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
+$name = $address = $year_opened = "";
+$name_err = $address_err = $year_opened_err = "";
  
 // Processing form data when form is submitted
 if(isset($_POST["id"]) && !empty($_POST["id"])){
@@ -30,28 +38,28 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     }
     
     // Validate salary
-    $input_salary = trim($_POST["salary"]);
-    if(empty($input_salary)){
-        $salary_err = "Please enter the salary amount.";     
-    } elseif(!ctype_digit($input_salary)){
-        $salary_err = "Please enter a positive integer value.";
+    $input_year_opened = trim($_POST["salary"]);
+    if(empty($input_year_opened)){
+        $year_opened_err = "Please enter the year opened.";
+    } elseif(!ctype_digit($input_year_opened)){
+        $year_opened_err = "Please enter the year opened.";
     } else{
-        $salary = $input_salary;
+        $year_opened = $input_year_opened;
     }
     
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($address_err) && empty($salary_err)){
+    if(empty($name_err) && empty($address_err) && empty($year_opened_err)){
         // Prepare an update statement
-        $sql = "UPDATE employees SET name=?, address=?, salary=? WHERE id=?";
+        $sql = "UPDATE manufacturer SET name=?, address=?, year_opened=? WHERE id=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssi", $param_name, $param_address, $param_salary, $param_id);
+            mysqli_stmt_bind_param($stmt, "sssi", $param_name, $param_address, $param_year_opened, $param_id);
             
             // Set parameters
             $param_name = $name;
             $param_address = $address;
-            $param_salary = $salary;
+            $param_year_opened = $year_opened;
             $param_id = $id;
             
             // Attempt to execute the prepared statement
@@ -77,7 +85,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $id =  trim($_GET["id"]);
         
         // Prepare a select statement
-        $sql = "SELECT * FROM employees WHERE id = ?";
+        $sql = "SELECT * FROM manufacturer WHERE id = ?";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
@@ -97,10 +105,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                     // Retrieve individual field value
                     $name = $row["name"];
                     $address = $row["address"];
-                    $salary = $row["salary"];
+                    $year_opened = $row["year_opened"];
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
-                    header("location: error.php");
+                    header("location: ../error.php");
                     exit();
                 }
                 
@@ -116,7 +124,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         mysqli_close($link);
     }  else{
         // URL doesn't contain id parameter. Redirect to error page
-        header("location: error.php");
+        header("location: ../error.php");
         exit();
     }
 }
@@ -155,8 +163,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                         </div>
                         <div class="form-group">
                             <label>Salary</label>
-                            <input type="text" name="salary" class="form-control <?php echo (!empty($salary_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $salary; ?>">
-                            <span class="invalid-feedback"><?php echo $salary_err;?></span>
+                            <input type="text" name="salary" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
+                            <span class="invalid-feedback"><?php echo $year_opened_err;?></span>
                         </div>
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
                         <input type="submit" class="btn btn-primary" value="Submit">

@@ -1,13 +1,15 @@
 <?php
-//Initialize the session
-session_start();
+// Initialize the session                                                                                                                                              
+session_start();                                                                                                                                                       
+                                                                                                                                                                       
+// Check if the user is logged in, if not then redirect him to login page                                                                                              
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
+    header("location: ../login.php");                                                                                                                                  
 
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-    header("location: ../login.php");
-    exit;
-}
+    exit;                                                                                                                                                              
+}     
 // Include config file
-require_once "config.php";
+require_once "../config.php";
  
 // Define variables and initialize with empty values
 $name = $address = $year_opened = "";
@@ -34,7 +36,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Validate salary
-    $input_year_opened = trim($_POST["year opened"]);
+    $input_year_opened = trim($_POST["year_opened"]);
     if(empty($input_year_opened)){
         $year_opened_err = "Please enter the year opened.";
     } elseif(!ctype_digit($input_year_opened)){
@@ -109,7 +111,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group">
                             <label>Salary</label>
-                            <input type="text" name="salary" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
+                            <input type="text" name="year_opened" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
                             <span class="invalid-feedback"><?php echo $year_opened_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">

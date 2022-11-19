@@ -1,8 +1,16 @@
-<?php
+<<?php
+// Initialize the session                                                                                                                                              
+session_start();                                                                                                                                                       
+                                                                                                                                                                       
+// Check if the user is logged in, if not then redirect him to login page                                                                                              
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
+    header("location: ../login.php");                                                                                                                                     
+    exit;                                                                                                                                                              
+}    
 // Check existence of id parameter before processing further
 if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     // Include config file
-    require_once "config.php";
+    require_once "../config.php";
     
     // Prepare a select statement
     $sql = "SELECT * FROM employees WHERE id = ?";
@@ -29,7 +37,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $salary = $row["salary"];
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
-                header("location: error.php");
+                header("location: ../error.php");
                 exit();
             }
             
@@ -45,7 +53,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     mysqli_close($link);
 } else{
     // URL doesn't contain id parameter. Redirect to error page
-    header("location: error.php");
+    header("location: ../error.php");
     exit();
 }
 ?>

@@ -1,8 +1,17 @@
 <?php
+// Initialize the session                                                                                                                                              
+session_start();                                                                                                                                                       
+                                                                                                                                                                       
+// Check if the user is logged in, if not then redirect him to login page                                                                                              
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
+    header("location: ../login.php");                                                                                                                                  
+
+    exit;                                                                                                                                                              
+}     
 // Process delete operation after confirmation
 if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Include config file
-    require_once "config.php";
+    require_once "../config.php";
     
     // Prepare a delete statement
     $sql = "DELETE FROM employees WHERE id = ?";
@@ -33,7 +42,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Check existence of id parameter
     if(empty(trim($_GET["id"]))){
         // URL doesn't contain id parameter. Redirect to error page
-        header("location: error.php");
+        header("location: ../error.php");
         exit();
     }
 }
@@ -74,3 +83,17 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     </div>
 </body>
 </html>
+Footer
+© 2022 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
