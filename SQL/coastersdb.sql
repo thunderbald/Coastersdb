@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `coasters`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `coasters` (
-  `coasterID` int NOT NULL,
+  `coasterID` int NOT NULL AUTO_INCREMENT,
   `coaster_name` varchar(45) DEFAULT NULL,
   `height(ft)` int DEFAULT NULL,
   `speed(mph)` int DEFAULT NULL,
@@ -35,8 +35,6 @@ CREATE TABLE `coasters` (
   `manufacturer` varchar(45) NOT NULL,
   PRIMARY KEY (`coasterID`),
   KEY `park_ID_idx` (`park_ID`),
-  KEY `manufacturer_idx` (`manufacturer`),
-  CONSTRAINT `manufacturer` FOREIGN KEY (`manufacturer`) REFERENCES `manufacturer` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `park_ID` FOREIGN KEY (`park_ID`) REFERENCES `parks` (`parkID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -58,10 +56,11 @@ DROP TABLE IF EXISTS `manufacturer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `manufacturer` (
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
   `address` varchar(45) DEFAULT NULL,
   `year_opened` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`name`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -71,7 +70,6 @@ CREATE TABLE `manufacturer` (
 
 LOCK TABLES `manufacturer` WRITE;
 /*!40000 ALTER TABLE `manufacturer` DISABLE KEYS */;
-INSERT INTO `manufacturer` VALUES ('Goodrollers','Huntington','1910');
 /*!40000 ALTER TABLE `manufacturer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,7 +96,6 @@ CREATE TABLE `parks` (
 
 LOCK TABLES `parks` WRITE;
 /*!40000 ALTER TABLE `parks` DISABLE KEYS */;
-INSERT INTO `parks` VALUES (123,'Funpark','Charleston',NULL,NULL);
 /*!40000 ALTER TABLE `parks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,8 +109,9 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +120,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('','$2y$10$vgiDgOJTBHD8D.rBBfyOtu5N.QysWpKcApQvos');
+INSERT INTO `users` VALUES ('jason','$2y$10$VzXeZEzhlzIqNuSR1v4USOYw9LJIm15RlsVNdo',4),('test','$2y$10$71kndW3GNcZnFGKD8YSkBufTt5X/.WpC/K4FR7',5);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -135,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-16 20:09:07
+-- Dump completed on 2022-11-19 21:04:51
