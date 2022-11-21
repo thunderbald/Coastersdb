@@ -3,10 +3,10 @@
 session_start();                                                                                                                                                       
                                                                                                                                                                        
 // Check if the user is logged in, if not then redirect him to login page                                                                                              
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
-    header("location: ../login.php");                                                                                                                                     
-    exit;                                                                                                                                                              
-}    
+//if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
+ //   header("location: ../login.php");                                                                                                                                     
+ //   exit;                                                                                                                                                              
+//}    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +40,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
                         <a href="../welcome.php" class="btn btn-primary pull-left mr-5"><i class="fa fa-home"></i></a>
-                        <h2 class="pull-left">Employees Details</h2>
+                        <h2 class="pull-left">Manufacturer Details</h2>
                         <a href="create.php" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add New Manufacturer</a>
                     </div>
                     <?php

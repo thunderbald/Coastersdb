@@ -6,10 +6,10 @@
 session_start();
  
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
-    exit;
-}
+//if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+  //  header("location: login.php");
+  //  exit;
+//}
 /* Require Session and Login End */
 ?>
  
@@ -30,7 +30,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
         <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
     </p> 
     <p>
-        <a href="employee/index.php" class="btn btn-primary">manufacturer</a>
+        <a href="manufacturer/index.php" class="btn btn-primary">Manufacturer</a>
+    </p>
+    <p>
+        <a href="coasters/index.php" class="btn btn-primary">Roller Coasters</a>
+    </p>
+    <p>
+        <a href="parks/index.php" class="btn btn-primary">Parks</a>
     </p>
 </body>
 </html>

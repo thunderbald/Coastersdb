@@ -3,10 +3,10 @@
 session_start();                                                                                                                                                       
                                                                                                                                                                        
 // Check if the user is logged in, if not then redirect him to login page                                                                                              
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
-    header("location: ../login.php");                                                                                                                                     
-    exit;                                                                                                                                                              
-}    
+//if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
+ //   header("location: ../login.php");                                                                                                                                     
+  //  exit;                                                                                                                                                              
+//}    
 // Include config file
 require_once "../config.php";
  
@@ -162,7 +162,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                             <span class="invalid-feedback"><?php echo $address_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Salary</label>
+                            <label>Year Opened</label>
                             <input type="text" name="salary" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
                             <span class="invalid-feedback"><?php echo $year_opened_err;?></span>
                         </div>

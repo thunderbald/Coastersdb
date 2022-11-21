@@ -3,24 +3,24 @@
 session_start();                                                                                                                                                       
                                                                                                                                                                        
 // Check if the user is logged in, if not then redirect him to login page                                                                                              
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
-    header("location: ../login.php");                                                                                                                                     
-    exit;                                                                                                                                                              
-}    
+//if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
+ //   header("location: ../login.php");                                                                                                                                     
+ //   exit;                                                                                                                                                              
+//}    
 // Check existence of id parameter before processing further
-if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
+if(isset($_GET["coasterID"]) && !empty(trim($_GET["coasterID"]))){
     // Include config file
     require_once "../config.php";
     
     // Prepare a select statement
-    $sql = "SELECT * FROM employees WHERE id = ?";
+    $sql = "SELECT * FROM coasters WHERE coasterID = ?";
     
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "i", $param_id);
+        mysqli_stmt_bind_param($stmt, "i", $param_coasterID);
         
         // Set parameters
-        $param_id = trim($_GET["id"]);
+        $param_coasterID = trim($_GET["id"]);
         
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -30,11 +30,12 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 /* Fetch result row as an associative array. Since the result set
                 contains only one row, we don't need to use while loop */
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                
+                //$coaster_name = $height = $speed = $coasterID = $Inversion_num = $year_opened  = $location = $parkID = $manufacturer = "";
                 // Retrieve individual field value
-                $name = $row["name"];
-                $address = $row["address"];
-                $salary = $row["salary"];
+                $coasterID = $row["coasterID"];
+                $coaster_name = $row["coaster_name"];
+                $height = $row["height"];
+                $speed = $row["speed"];
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: ../error.php");
