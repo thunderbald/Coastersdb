@@ -29,7 +29,6 @@ CREATE TABLE `coasters` (
   `speed(mph)` int DEFAULT NULL,
   `Inversion_num` int DEFAULT NULL,
   `year_opened` int DEFAULT NULL,
-  `year_closed` int DEFAULT NULL,
   `location` varchar(45) DEFAULT NULL,
   `park_ID` int DEFAULT NULL,
   `manufacturer` varchar(45) NOT NULL,
@@ -133,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-19 21:04:51
+-- Dump completed on 2022-11-20 20:28:04

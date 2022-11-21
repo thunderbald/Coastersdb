@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
     "",
-    "\\PHP\\Coasters",
-    "\\PHP\\Manufacturer",
-    "\\PHP\\Parks",
     "\\SQL"
   ],
-  "SelectedNode": "\\SQL\\coastersdb.sql",
   "PreviewInSolutionExplorer": false
 }

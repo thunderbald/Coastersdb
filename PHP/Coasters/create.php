@@ -69,16 +69,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $year_opened = $input_year_opened;
     }
 
-
+    // Validate location
+    $input_location = trim($_POST["location"]);
+    if(empty($input_location)){
+        $location_err = "Please enter the location.";
+    } else{
+        $location = $input_location;
+    }
+    // Validate parkID
+    $input_parkID = trim($_POST["parkID"]);
+    if(empty($input_parkID)){
+        $parkID_err = "Please enter the parkID.";
+    } else{
+        $parkID = $input_parkID;
+    }
+    // Validate manufacturer
+    $input_manufacturer = trim($_POST["manufacturer"]);
+    if(empty($input_manufacturer)){
+        $manufacturer_err = "Please enter the manufacturer.";
+    } else{
+        $manufacturer = $input_manufacturer;
+    }
 
     // Check input errors before inserting in database
-    if(empty($coaster_name_err) && empty($height_err) && empty($speed_err) && empty($coasterID_err) && empty($Inversion_num_err) && empty($year_opened_err)){
+    if(empty($coaster_name_err) && empty($height_err) && empty($speed_err) && empty($coasterID_err)
+        && empty($Inversion_num_err) && empty($year_opened_err) && empty($location_err) && empty($parkID_err) && empty($manufacturer_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO coasters (coaster_name, height, speed, coasterID, Inversion_num, year_opened) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO coasters (coaster_name, height, speed, coasterID, Inversion_num, year_opened, location, parkID, manufacturer) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_height, $param_speed, $param_coasterID, $param_Inversion_num, $param_year_opened);
+            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_height,
+                $param_speed, $param_coasterID, $param_Inversion_num, $param_year_opened, $param_location, $param_parkID, $param_manufacturer);
             
             // Set parameters
             $param_name = $coaster_name;
@@ -87,7 +110,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_coasterID = $coasterID;
             $param_Inversion_num = $Inversion_num;
             $param_year_opened = $year_opened;
-
+            $param_location = $location;
+            $param_parkID = $parkID;
+            $param_manufacturer = $manufacturer;
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -160,7 +185,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             <input type="text" name="year_opened" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
                             <span class="invalid-feedback"><?php echo $year_opened_err;?></span>
                         </div>
-
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" name="location" class="form-control <?php echo (!empty($location_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $location; ?>">
+                            <span class="invalid-feedback"><?php echo $location_err;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Park ID</label>
+                            <input type="text" name="location" class="form-control <?php echo (!empty($parkID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $parkID; ?>">
+                            <span class="invalid-feedback"><?php echo $parkID_err;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Manufacturer</label>
+                            <input type="text" name="location" class="form-control <?php echo (!empty($manufacturer_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $manufacturer; ?>">
+                            <span class="invalid-feedback"><?php echo $manufacturer_err;?></span>
+                        </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
