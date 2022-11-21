@@ -36,6 +36,11 @@ if(isset($_GET["coasterID"]) && !empty(trim($_GET["coasterID"]))){
                 $coaster_name = $row["coaster_name"];
                 $height = $row["height"];
                 $speed = $row["speed"];
+                $Inversion_num = $row["Inversion_num"];
+                $year_opened = $row["year_opened"];
+                $location = $row["location"];
+                $parkID = $row["parkID"];
+                $manufacturer = $row["manufacturer"];
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: ../error.php");
@@ -72,6 +77,7 @@ if(isset($_GET["coasterID"]) && !empty(trim($_GET["coasterID"]))){
         }
     </style>
 </head>
+//$coaster_name = $height = $speed = $coasterID = $Inversion_num = $year_opened  = $location = $parkID = $manufacturer = "";
 <body>
     <div class="wrapper">
         <div class="container-fluid">
@@ -79,16 +85,40 @@ if(isset($_GET["coasterID"]) && !empty(trim($_GET["coasterID"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
+                        <label>Coaster ID</label>
+                        <p><b><?php echo $row["coasterID"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
                         <label>Name</label>
-                        <p><b><?php echo $row["name"]; ?></b></p>
+                        <p><b><?php echo $row["coaster_name"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Address</label>
-                        <p><b><?php echo $row["address"]; ?></b></p>
+                        <label>Height</label>
+                        <p><b><?php echo $row["height"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Salary</label>
-                        <p><b><?php echo $row["salary"]; ?></b></p>
+                        <label>Speed</label>
+                        <p><b><?php echo $row["speed"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of inversions</label>
+                        <p><b><?php echo $row["inversion_num"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Year Opened</label>
+                        <p><b><?php echo $row["year_opened"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <p><b><?php echo $row["location"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Park ID</label>
+                        <p><b><?php echo $row["parkID"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Manufacturer</label>
+                        <p><b><?php echo $row["manufacturer"]; ?></b></p>
                     </div>
                     <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
