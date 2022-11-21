@@ -1,4 +1,4 @@
-// <?php error_reporting (E_ALL ^ E_NOTICE); ?>
+
 <?php
 // Initialize the session                                                                                                                                              
 session_start();                                                                                                                                                       
@@ -20,7 +20,8 @@ $year_opened_err = $location_err = $parkID_err = $manufacturer_err =  "";
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate name
-    $input_coaster_name = trim($_POST["coaster_name"]);
+    //$input_coaster_name = trim($_POST["coaster_name"]);
+    $input_coaster_name = trim(isset($_POST['coaster_name'])? $_POST['coaster_name'] : '');
     if(empty($input_coaster_name)){
         $coaster_name_err = "Please enter a name.";
     } elseif(!filter_var($input_coaster_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
@@ -28,9 +29,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $coaster_name = $input_coaster_name;
     }
-    
+    //$reservation_id = isset($_POST['reservation_id']) ? $_POST['reservation_id'] : '';
     // Validate height
-    $input_height = trim($_POST["height"]);
+    //$input_height = trim($_POST["height"]);
+    $input_height = trim(isset($_POST['height'])? $_POST['height'] : '');
     if(empty($input_height)){
         $height_err = "Please enter coaster height.";
     } else{
@@ -38,16 +40,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Validate speed
-    $input_speed = trim($_POST["speed"]);
+    //$input_speed = trim($_POST["speed"]);
+    $input_speed = trim(isset($_POST['speed'])? $_POST['speed'] : '');
     if(empty($input_speed)){
-        $speed_err = "Please enter the salary amount.";
+        $speed_err = "Please enter the speed.";
     } elseif(!ctype_digit($input_speed)){
-        $speed_err = "Please enter a positive integer value.";
+        $speed_err = "Please enter the speed in mph.";
     } else{
         $speed = $input_speed;
     }
     // Validate coasterID
-    $input_coasterID = trim($_POST["coasterID"]);
+    //$input_coasterID = trim($_POST["coasterID"]);
+    $input_coasterID = trim(isset($_POST['coasterID'])? $_POST['coasterID'] : '');
     if(empty($input_coasterID)){
         $coasterID_err = "Please enter unique coasterID.";
     } else{
@@ -55,7 +59,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Validate number of inversions
-    $input_coasterID = trim($_POST["Inversion_num"]);
+    //$input_coasterID = trim($_POST["Inversion_num"]);
+    $input_Inversion_num = trim(isset($_POST['Inversion_num'])? $_POST['Inversion_num'] : '');
     if(empty($input_Inversion_num)){
         $Inversion_num_err = "Please enter number of inversions.";
     } else{
@@ -63,7 +68,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Validate year opened
-    $input_year_opened = trim($_POST["year_opened"]);
+    //$input_year_opened = trim($_POST["year_opened"]);
+    $input_year_opened = trim(isset($_POST['year_opened'])? $_POST['year_opened'] : '');
     if(empty($input_year_opened)){
         $year_opened_err = "Please enter the year opened.";
     } else{
@@ -71,21 +77,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Validate location
-    $input_location = trim($_POST["location"]);
+    //$input_location = trim($_POST["location"]);
+    $input_location= trim(isset($_POST['location'])? $_POST['location'] : '');
     if(empty($input_location)){
         $location_err = "Please enter the location.";
     } else{
         $location = $input_location;
     }
     // Validate parkID
-    $input_parkID = trim($_POST["parkID"]);
+    //$input_parkID = trim($_POST["parkID"]);
+    $input_parkID = trim(isset($_POST['parkID'])? $_POST['parkID'] : '');
     if(empty($input_parkID)){
         $parkID_err = "Please enter the parkID.";
     } else{
         $parkID = $input_parkID;
     }
     // Validate manufacturer
-    $input_manufacturer = trim($_POST["manufacturer"]);
+    //$input_manufacturer = trim($_POST["manufacturer"]);
+    $input_manufacturer= trim(isset($_POST['manufacturer'])? $_POST['manufacturer'] : '');
     if(empty($input_manufacturer)){
         $manufacturer_err = "Please enter the manufacturer.";
     } else{
@@ -103,7 +112,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_height,
                 $param_speed, $param_coasterID, $param_Inversion_num, $param_year_opened, $param_location, $param_parkID, $param_manufacturer);
-            
+
             // Set parameters
             $param_name = $coaster_name;
             $param_height = $height;
@@ -158,22 +167,22 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
                         <div class="form-group">
                             <label>coasterID</label>
-                            <input type="text" name="name" class="form-control <?php echo (!empty($coasterID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $coasterID; ?>">
+                            <input type="text" name="coasterID" class="form-control <?php echo (!empty($coasterID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $coasterID; ?>">
                             <span class="invalid-feedback"><?php echo $coasterID_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" name="name" class="form-control <?php echo (!empty($coaster_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $coaster_name; ?>">
+                            <input type="text" name="coaster_name" class="form-control <?php echo (!empty($coaster_name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $coaster_name; ?>">
                             <span class="invalid-feedback"><?php echo $coaster_name_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Height</label>
-                            <textarea name="address" class="form-control <?php echo (!empty($height_err)) ? 'is-invalid' : ''; ?>"><?php echo $height; ?></textarea>
+                            <textarea name="height" class="form-control <?php echo (!empty($height_err)) ? 'is-invalid' : ''; ?>"><?php echo $height; ?></textarea>
                             <span class="invalid-feedback"><?php echo $height_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Speed</label>
-                            <input type="text" name="salary" class="form-control <?php echo (!empty($speed_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $speed; ?>">
+                            <input type="text" name="speed" class="form-control <?php echo (!empty($speed_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $speed; ?>">
                             <span class="invalid-feedback"><?php echo $speed_err;?></span>
                         </div>
                         <div class="form-group">
@@ -193,12 +202,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group">
                             <label>Park ID</label>
-                            <input type="text" name="location" class="form-control <?php echo (!empty($parkID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $parkID; ?>">
+                            <input type="text" name="parkID" class="form-control <?php echo (!empty($parkID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $parkID; ?>">
                             <span class="invalid-feedback"><?php echo $parkID_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Manufacturer</label>
-                            <input type="text" name="location" class="form-control <?php echo (!empty($manufacturer_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $manufacturer; ?>">
+                            <input type="text" name="manufacturer" class="form-control <?php echo (!empty($manufacturer_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $manufacturer; ?>">
                             <span class="invalid-feedback"><?php echo $manufacturer_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
