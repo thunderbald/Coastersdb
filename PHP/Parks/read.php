@@ -3,24 +3,24 @@
 session_start();                                                                                                                                                       
                                                                                                                                                                        
 // Check if the user is logged in, if not then redirect him to login page                                                                                              
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
-    header("location: ../login.php");                                                                                                                                     
-    exit;                                                                                                                                                              
-}    
+//if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+  //  header("location: ../login.php");
+  //  exit;
+//}
 // Check existence of id parameter before processing further
-if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
+if(isset($_GET["parkID"]) && !empty(trim($_GET["parkID"]))){
     // Include config file
     require_once "../config.php";
     
     // Prepare a select statement
-    $sql = "SELECT * FROM employees WHERE id = ?";
+    $sql = "SELECT * FROM parks WHERE parkID = ?";
     
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
         mysqli_stmt_bind_param($stmt, "i", $param_id);
         
         // Set parameters
-        $param_id = trim($_GET["id"]);
+        $param_id = trim($_GET["parkID"]);
         
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -32,9 +32,11 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                 
                 // Retrieve individual field value
-                $name = $row["name"];
-                $address = $row["address"];
-                $salary = $row["salary"];
+                $parkID = $row["parkID"];
+                $park_name = $row["park_name"];
+                $location = $row["location"];
+                $year_opened = $row["year_opened"];
+                $num_coasters = $row["num_coasters"];
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
                 header("location: ../error.php");
@@ -78,16 +80,24 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 <div class="col-md-12">
                     <h1 class="mt-5 mb-3">View Record</h1>
                     <div class="form-group">
-                        <label>Name</label>
-                        <p><b><?php echo $row["name"]; ?></b></p>
+                        <label>ParkID</label>
+                        <p><b><?php echo $row["parkID"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Address</label>
-                        <p><b><?php echo $row["address"]; ?></b></p>
+                        <label>Park Name</label>
+                        <p><b><?php echo $row["park_name"]; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Salary</label>
-                        <p><b><?php echo $row["salary"]; ?></b></p>
+                        <label>Location</label>
+                        <p><b><?php echo $row["location"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Year Opened</label>
+                        <p><b><?php echo $row["year_opened"]; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Number of Coasters</label>
+                        <p><b><?php echo $row["num_coasters"]; ?></b></p>
                     </div>
                     <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>

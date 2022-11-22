@@ -3,61 +3,82 @@
 session_start();                                                                                                                                                       
                                                                                                                                                                        
 // Check if the user is logged in, if not then redirect him to login page                                                                                              
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){                                                                                                   
-    header("location: ../login.php");                                                                                                                                  
+//if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+  //  header("location: ../login.php");
 
-    exit;                                                                                                                                                              
-}     
+   // exit;
+//}
 // Include config file
 require_once "../config.php";
  
 // Define variables and initialize with empty values
-$name = $address = $salary = "";
-$name_err = $address_err = $salary_err = "";
+$park_name = $location = $year_opened = $parkID = $num_coasters= "";
+$name_err = $location_err = $year_opened_err = $parkID_err = $num_coasters_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    // Validate name
-    $input_name = trim($_POST["name"]);
-    if(empty($input_name)){
+
+    // Validate parkID
+    $input_parkID = trim($_POST["parkID"]);
+    if(empty($input_parkID)){
+        $parkID_err = "Please enter the unique parkID.";
+    } else{
+        $parkID = $input_parkID;
+    }
+
+    // Validate park name
+    //$input_park_name = trim($_POST["park_name"]);
+    $input_park_name = trim(isset($_POST['park_name'])? $_POST['park_name'] : '');
+    if(empty($input_park_name)){
         $name_err = "Please enter a name.";
-    } elseif(!filter_var($input_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
+    } elseif(!filter_var($input_park_name, FILTER_VALIDATE_REGEXP, array("options"=>array("regexp"=>"/^[a-zA-Z\s]+$/")))){
         $name_err = "Please enter a valid name.";
     } else{
-        $name = $input_name;
+        $park_name = $input_park_name;
     }
     
-    // Validate address
-    $input_address = trim($_POST["address"]);
-    if(empty($input_address)){
-        $address_err = "Please enter an address.";     
+    // Validate location
+    $input_location = trim($_POST["location"]);
+    if(empty($input_location)){
+        $location_err = "Please enter the location.";
     } else{
-        $address = $input_address;
+        $location = $input_location;
     }
     
-    // Validate salary
-    $input_salary = trim($_POST["salary"]);
-    if(empty($input_salary)){
-        $salary_err = "Please enter the salary amount.";     
-    } elseif(!ctype_digit($input_salary)){
-        $salary_err = "Please enter a positive integer value.";
+    // Validate year opened
+    $input_year_opened = trim($_POST["year_opened"]);
+    if(empty($input_year_opened)){
+        $year_opened_err = "Please enter the year opened.";
+    } elseif(!ctype_digit($input_year_opened)){
+        $year_opened_err = "Please enter the year opened.";
     } else{
-        $salary = $input_salary;
+        $year_opened = $input_year_opened;
     }
-    
+
+    // Validate the number of coasters
+    $input_num_coasters = trim($_POST["num_coasters"]);
+    if(empty($input_num_coasters)){
+        $num_coasters_err = "Please enter the number of coasters.";
+    } else{
+        $num_coasters = $input_num_coasters;
+    }
+
+
     // Check input errors before inserting in database
-    if(empty($name_err) && empty($address_err) && empty($salary_err)){
+    if(empty($name_err) && empty($location_err) && empty($year_opened_err) && empty($parkID_err) && empty($num_coasters_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO employees (name, address, salary) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO parks (park_name, location, year_opened, parkID, num_coasters) VALUES (?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_address, $param_salary);
+            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_location, $param_year_opened, $param_num_coasters, $param_parkID);
             
             // Set parameters
-            $param_name = $name;
-            $param_address = $address;
-            $param_salary = $salary;
+            $param_name = $park_name;
+            $param_location = $location;
+            $param_year_opened = $year_opened;
+            $param_parkID = $parkID;
+            $param_num_coasters = $num_coasters;
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -100,19 +121,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     <p>Please fill this form and submit to add employee record to the database.</p>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $name; ?>">
+                            <label>Park ID</label>
+                            <input type="text" name="parkID" class="form-control <?php echo (!empty($parkID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $parkID; ?>">
+                            <span class="invalid-feedback"><?php echo $parkID_err;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Park Name</label>
+                            <input type="text" name="park_name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $park_name; ?>">
                             <span class="invalid-feedback"><?php echo $name_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Address</label>
-                            <textarea name="address" class="form-control <?php echo (!empty($address_err)) ? 'is-invalid' : ''; ?>"><?php echo $address; ?></textarea>
-                            <span class="invalid-feedback"><?php echo $address_err;?></span>
+                            <label>Location</label>
+                            <input type = "text" name="location" class="form-control <?php echo (!empty($location_err)) ? 'is-invalid' : ''; ?>"><?php echo $location; ?>">
+                            <span class="invalid-feedback"><?php echo $location_err;?></span>
                         </div>
                         <div class="form-group">
-                            <label>Salary</label>
-                            <input type="text" name="salary" class="form-control <?php echo (!empty($salary_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $salary; ?>">
-                            <span class="invalid-feedback"><?php echo $salary_err;?></span>
+                            <label>Year Opened</label>
+                            <input type="text" name="year_opened" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
+                            <span class="invalid-feedback"><?php echo $year_opened_err;?></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of coasters</label>
+                            <input type="text" name="num_coasters" class="form-control <?php echo (!empty($num_coasters_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $num_coasters; ?>">
+                            <span class="invalid-feedback"><?php echo $num_coasters_err;?></span>
                         </div>
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>

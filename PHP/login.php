@@ -22,6 +22,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter username.";
     } else{
+        //$username= trim(isset($_POST['username'])? $_POST['username'] : '');
         $username = trim($_POST["username"]);
     }
     
@@ -29,6 +30,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter your password.";
     } else{
+        //$password = trim(isset($_POST['password'])? $_POST['password'] : '');
         $password = trim($_POST["password"]);
     }
     
@@ -36,6 +38,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
         $sql = "SELECT id, username, password FROM users WHERE username = ?";
+        //$sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -43,6 +46,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             // Set parameters
             $param_username = $username;
+
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
