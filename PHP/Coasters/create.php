@@ -105,12 +105,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     if(empty($coaster_name_err) && empty($height_err) && empty($speed_err) && empty($coasterID_err)
         && empty($Inversion_num_err) && empty($year_opened_err) && empty($location_err) && empty($parkID_err) && empty($manufacturer_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO coasters (coaster_name, height, speed, coasterID, Inversion_num, year_opened, location, parkID, manufacturer) 
+        $sql = "INSERT INTO coasters (coasterID,  coaster_name, height, speed, Inversion_num, year_opened, location, parkID, manufacturer) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_name, $param_height,
+            mysqli_stmt_bind_param($stmt, "siiiiisis", $param_name, $param_height,
                 $param_speed, $param_coasterID, $param_Inversion_num, $param_year_opened, $param_location, $param_parkID, $param_manufacturer);
 
             // Set parameters
@@ -123,6 +123,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_location = $location;
             $param_parkID = $parkID;
             $param_manufacturer = $manufacturer;
+
 
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -177,7 +178,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                         </div>
                         <div class="form-group">
                             <label>Height</label>
-                            <textarea name="height" class="form-control <?php echo (!empty($height_err)) ? 'is-invalid' : ''; ?>"><?php echo $height; ?></textarea>
+                            <input type = "text" name="height" class="form-control <?php echo (!empty($height_err)) ? 'is-invalid' : ''; ?>" value ="<?php echo $height; ?>">
                             <span class="invalid-feedback"><?php echo $height_err;?></span>
                         </div>
                         <div class="form-group">
