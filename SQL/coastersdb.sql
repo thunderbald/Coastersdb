@@ -27,14 +27,13 @@ CREATE TABLE `coasters` (
   `coaster_name` varchar(45) DEFAULT NULL,
   `height(ft)` int DEFAULT NULL,
   `speed(mph)` int DEFAULT NULL,
-  `Inversion_num` int DEFAULT NULL,
   `year_opened` int DEFAULT NULL,
   `location` varchar(45) DEFAULT NULL,
   `park_ID` int DEFAULT NULL,
   `manufacturer` varchar(45) NOT NULL,
   PRIMARY KEY (`coasterID`),
   KEY `park_ID_idx` (`park_ID`),
-  CONSTRAINT `park_ID` FOREIGN KEY (`park_ID`) REFERENCES `parks` (`parkID`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `coasters_ibfk_2` FOREIGN KEY (`park_ID`) REFERENCES `parks` (`parkID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -60,7 +59,7 @@ CREATE TABLE `manufacturer` (
   `address` varchar(45) DEFAULT NULL,
   `year_opened` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +68,7 @@ CREATE TABLE `manufacturer` (
 
 LOCK TABLES `manufacturer` WRITE;
 /*!40000 ALTER TABLE `manufacturer` DISABLE KEYS */;
+INSERT INTO `manufacturer` VALUES (2,'thunder','huntington','1999');
 /*!40000 ALTER TABLE `manufacturer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,6 +95,7 @@ CREATE TABLE `parks` (
 
 LOCK TABLES `parks` WRITE;
 /*!40000 ALTER TABLE `parks` DISABLE KEYS */;
+INSERT INTO `parks` VALUES (4,'Camden Park','Huntington',1900,1);
 /*!40000 ALTER TABLE `parks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +111,7 @@ CREATE TABLE `users` (
   `password` varchar(45) NOT NULL,
   `id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +120,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('jason','$2y$10$VzXeZEzhlzIqNuSR1v4USOYw9LJIm15RlsVNdo',4),('test','$2y$10$71kndW3GNcZnFGKD8YSkBufTt5X/.WpC/K4FR7',5);
+INSERT INTO `users` VALUES ('jason','$2y$10$VzXeZEzhlzIqNuSR1v4USOYw9LJIm15RlsVNdo',4),('test','$2y$10$71kndW3GNcZnFGKD8YSkBufTt5X/.WpC/K4FR7',5),('austin','$2y$10$54qioA9PXAEqVlVQ7V9DneBPmRQnX3vf5Tq19s',6);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -132,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-20 20:28:04
+-- Dump completed on 2022-11-28 15:02:41
