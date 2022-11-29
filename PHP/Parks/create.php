@@ -19,7 +19,8 @@ $name_err = $location_err = $year_opened_err = $parkID_err = $num_coasters_err =
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     // Validate parkID
-    $input_parkID = trim($_POST["parkID"]);
+    //$input_parkID = trim($_POST["parkID"]);
+    $input_parkID = trim(isset($_POST['parkID'])? $_POST['parkID'] : '');
     if(empty($input_parkID)){
         $parkID_err = "Please enter the unique parkID.";
     } else{
@@ -38,7 +39,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Validate location
-    $input_location = trim($_POST["location"]);
+    //$input_location = trim($_POST["location"]);
+    $input_location = trim(isset($_POST['location'])? $_POST['location'] : '');
     if(empty($input_location)){
         $location_err = "Please enter the location.";
     } else{
@@ -46,7 +48,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Validate year opened
-    $input_year_opened = trim($_POST["year_opened"]);
+   // $input_year_opened = trim($_POST["year_opened"]);
+    $input_year_opened = trim(isset($_POST['year_opened'])? $_POST['year_opened'] : '');
     if(empty($input_year_opened)){
         $year_opened_err = "Please enter the year opened.";
     } elseif(!ctype_digit($input_year_opened)){
@@ -56,7 +59,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
 
     // Validate the number of coasters
-    $input_num_coasters = trim($_POST["num_coasters"]);
+    //$input_num_coasters = trim($_POST["num_coasters"]);
+    $input_num_coasters = trim(isset($_POST['num_coasters'])? $_POST['num_coasters'] : '');
     if(empty($input_num_coasters)){
         $num_coasters_err = "Please enter the number of coasters.";
     } else{
@@ -67,11 +71,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Check input errors before inserting in database
     if(empty($name_err) && empty($location_err) && empty($year_opened_err) && empty($parkID_err) && empty($num_coasters_err)){
         // Prepare an insert statement
-        $sql = "INSERT INTO parks (park_name, location, year_opened, parkID, num_coasters) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO parks (parkID, park_name, location, year_opened, num_coasters) VALUES (?, ?, ?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ssiii", $param_name, $param_location, $param_year_opened, $param_num_coasters, $param_parkID);
+            mysqli_stmt_bind_param($stmt, "issii",$param_parkID, $param_name, $param_location, $param_year_opened, $param_num_coasters);
             
             // Set parameters
             $param_name = $park_name;
