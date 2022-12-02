@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `coasters`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `coasters` (
-  `coasterID` int NOT NULL AUTO_INCREMENT,
+  `coasterID` int NOT NULL,
   `coaster_name` varchar(45) DEFAULT NULL,
   `height_ft` int DEFAULT NULL,
   `speed_mph` int DEFAULT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE `coasters` (
   PRIMARY KEY (`coasterID`),
   KEY `park_ID_idx` (`park_ID`),
   CONSTRAINT `coasters_ibfk_2` FOREIGN KEY (`park_ID`) REFERENCES `parks` (`parkID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `manufacturer` (
   `address` varchar(45) DEFAULT NULL,
   `year_opened` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `manufacturer` (
 
 LOCK TABLES `manufacturer` WRITE;
 /*!40000 ALTER TABLE `manufacturer` DISABLE KEYS */;
-INSERT INTO `manufacturer` VALUES (1,'Intamin','Switzerland','1967'),(2,'thunder','huntington','1999'),(3,'Bolliger & Mabillard(B&M)','Switzerland','1988'),(4,'Rocky Mountain Construction(RMC)','United States','2001'),(5,'Premier Rides','United States','1994'),(6,'Vekoma','Netherlands','1926'),(7,'Great Coasters International(GCI)','United States','1994'),(8,'Arrow','United States','1986');
+INSERT INTO `manufacturer` VALUES (1,'Intamin','Switzerland','1967'),(2,'Sansei Technologies','United States','1994'),(3,'Bolliger & Mabillard(B&M)','Switzerland','1988'),(4,'Rocky Mountain Construction(RMC)','United States','2001'),(5,'Premier Rides','United States','1994'),(6,'Vekoma','Netherlands','1926'),(7,'Great Coasters International(GCI)','United States','1994'),(8,'Arrow','United States','1986'),(9,'Boeing','United States','1925');
 /*!40000 ALTER TABLE `manufacturer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +96,7 @@ CREATE TABLE `parks` (
 
 LOCK TABLES `parks` WRITE;
 /*!40000 ALTER TABLE `parks` DISABLE KEYS */;
-INSERT INTO `parks` VALUES (1,'Kings Island','Mason',1972,11),(2,'Cedar Point','Sandusky',1870,17),(3,'Carowinds','Charlotte',1973,14),(4,'Camden Park','Huntington',1900,1),(5,'Kings Dominion','Doswell',1975,13),(20,'Kings Island','Cincinnati',1900,5);
+INSERT INTO `parks` VALUES (1,'Kings Island','Mason',1972,11),(2,'Cedar Point','Sandusky',1870,17),(3,'Carowinds','Charlotte',1973,14),(4,'Camden Park','Huntington',1900,1),(5,'Kings Dominion','Doswell',1975,13),(6,'Six Flags','Atlanta',1970,58),(15,'Disney World','Orlando',1958,50),(20,'Kings Island','Cincinnati',1900,5);
 /*!40000 ALTER TABLE `parks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,7 +112,7 @@ CREATE TABLE `users` (
   `password` varchar(45) NOT NULL,
   `id` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -121,7 +121,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('jason','$2y$10$VzXeZEzhlzIqNuSR1v4USOYw9LJIm15RlsVNdo',4),('test','$2y$10$71kndW3GNcZnFGKD8YSkBufTt5X/.WpC/K4FR7',5),('austin','$2y$10$54qioA9PXAEqVlVQ7V9DneBPmRQnX3vf5Tq19s',6);
+INSERT INTO `users` VALUES ('jason','$2y$10$VzXeZEzhlzIqNuSR1v4USOYw9LJIm15RlsVNdo',4),('test','$2y$10$71kndW3GNcZnFGKD8YSkBufTt5X/.WpC/K4FR7',5),('austin','$2y$10$54qioA9PXAEqVlVQ7V9DneBPmRQnX3vf5Tq19s',6),('ben','$2y$10$aV8M/kqRbO5RuTKE02mxauikbUh9Ix32buwD/z',7);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -134,4 +134,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-29 14:07:49
+-- Dump completed on 2022-12-02 10:47:57

@@ -1,6 +1,10 @@
 {
   "ExpandedNodes": [
     "",
+    "\\PHP",
+    "\\PHP\\Coasters",
+    "\\PHP\\Manufacturer",
+    "\\PHP\\Parks",
     "\\SQL"
   ],
   "PreviewInSolutionExplorer": false

@@ -62,13 +62,13 @@ if(isset($_POST["parkID"]) && !empty($_POST["parkID"])){
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssi", $param_park_name, $param_location, $param_year_opened, $param_parkID, $param_num_coasters);
+            mysqli_stmt_bind_param($stmt, "issii",$param_parkID, $param_park_name, $param_location, $param_year_opened, $param_num_coasters);
             
             // Set parameters
+            $param_parkID = $parkID;
             $param_park_name = $park_name;
             $param_location = $location;
-            $param_year_opened = $year_opened;
-            $param_parkID = $parkID;
+            $param_year_opened = $year_opened;            
             $param_num_coasters = $num_coasters;
             
             // Attempt to execute the prepared statement
@@ -112,7 +112,8 @@ if(isset($_POST["parkID"]) && !empty($_POST["parkID"])){
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     
                     // Retrieve individual field value
-                    $park_name = $row["parkID"];
+                    $parkID = $row["parkID"];
+                    $park_name = $row["park_name"];
                     $location = $row["location"];
                     $year_opened = $row["year_opened"];
                     $num_coasters = $row["num_coasters"];
@@ -161,9 +162,14 @@ if(isset($_POST["parkID"]) && !empty($_POST["parkID"])){
                     <h2 class="mt-5">Update Record</h2>
                     <p>Please edit the input values and submit to update the Park record.</p>
                     <form action="<?php echo htmlspecialchars(basename($_SERVER['REQUEST_URI'])); ?>" method="post">
+                         <div class="form-group">
+                            <label>Park ID</label>
+                            <input type="text" name="parkID" class="form-control <?php echo (!empty($parkID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $parkID; ?>">
+                            <span class="invalid-feedback"><?php echo $parkID_err;?></span>
+                        </div>
                         <div class="form-group">
                             <label>Park Name</label>
-                            <input type="text" name="name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $park_name; ?>">
+                            <input type="text" name="park_name" class="form-control <?php echo (!empty($name_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $park_name; ?>">
                             <span class="invalid-feedback"><?php echo $name_err;?></span>
                         </div>
                         <div class="form-group">
@@ -173,7 +179,7 @@ if(isset($_POST["parkID"]) && !empty($_POST["parkID"])){
                         </div>
                         <div class="form-group">
                             <label>Year Opened</label>
-                            <input type="text" name="location" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
+                            <input type="text" name="year_opened" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
                             <span class="invalid-feedback"><?php echo $year_opened_err;?></span>
                         </div>
                         <div class="form-group">
@@ -181,7 +187,7 @@ if(isset($_POST["parkID"]) && !empty($_POST["parkID"])){
                             <input type="text" name="num_coasters" class="form-control <?php echo (!empty($num_coasters_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $num_coasters; ?>">
                             <span class="invalid-feedback"><?php echo $num_coasters_err;?></span>
                         </div>
-                        <input type="hidden" name="parkID" value="<?php echo $parkID; ?>"/>
+                        
                         <input type="submit" class="btn btn-primary" value="Submit">
                         <a href="index.php" class="btn btn-secondary ml-2">Cancel</a>
                     </form>

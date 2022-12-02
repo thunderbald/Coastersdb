@@ -69,8 +69,8 @@ if(isset($_POST["parkID"]) && !empty($_POST["parkID"])){
                     <h2 class="mt-5 mb-3">Delete Record</h2>
                     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="alert alert-danger">
-                            <input type="hidden" name="id" value="<?php echo trim($_GET["parkID"]); ?>"/>
-                            <p>Are you sure you want to delete this employee record?</p>
+                            <input type="hidden" name="parkID" value="<?php echo trim($_GET["parkID"]); ?>"/>
+                            <p>Are you sure you want to delete this record?</p>
                             <p>
                                 <input type="submit" value="Yes" class="btn btn-danger">
                                 <a href="index.php" class="btn btn-secondary">No</a>

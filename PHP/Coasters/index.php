@@ -54,12 +54,11 @@ session_start();
                             echo '<table class="table table-bordered table-striped">';
                                 echo "<thead>";
                                     echo "<tr>";
-                                        echo "<th>#</th>";
+                                        
                                         echo "<th>Coaster ID</th>";
                                         echo "<th>Name</th>";
                                         echo "<th>Height</th>";
                                         echo "<th>Speed</th>";
-                                        echo "<th>Number of inversions</th>";
                                         echo "<th>Year Opened</th>";
                                         echo "<th>Location</th>";
                                         echo "<th>Park ID</th>";
@@ -72,19 +71,18 @@ session_start();
                                     echo "<tr>";
                                         echo "<td>" . $row['coasterID'] . "</td>";
                                         echo "<td>" . $row['coaster_name'] . "</td>";
-                                        echo "<td>" . $row['height'] . "</td>";
-                                        echo "<td>" . $row['speed'] . "</td>";
-                                        echo "<td>" . $row['num_inversions'] . "</td>";
+                                        echo "<td>" . $row['height_ft'] . "</td>";
+                                        echo "<td>" . $row['speed_mph'] . "</td>";
                                         echo "<td>" . $row['year_opened'] . "</td>";
                                         echo "<td>" . $row['location'] . "</td>";
-                                        echo "<td>" . $row['parkID'] . "</td>";
+                                        echo "<td>" . $row['park_ID'] . "</td>";
                                         echo "<td>" . $row['manufacturer'] . "</td>";
-                                    echo "<td>";
-                                    echo "<td>";
+                                    
+                                       
                                         echo "<td>";
-                                            echo '<a href="read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
-                                            echo '<a href="update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
-                                            echo '<a href="delete.php?id='. $row['id'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
+                                            echo '<a href="read.php?id='. $row['coasterID'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
+                                            echo '<a href="update.php?id='. $row['coasterID'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';
+                                            echo '<a href="delete.php?id='. $row['coasterID'] .'" title="Delete Record" data-toggle="tooltip"><span class="fa fa-trash"></span></a>';
                                         echo "</td>";
                                     echo "</tr>";
                                 }

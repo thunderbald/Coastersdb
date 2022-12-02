@@ -38,7 +38,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     }
     
     // Validate salary
-    $input_year_opened = trim($_POST["salary"]);
+    $input_year_opened = trim($_POST["year_opened"]);
     if(empty($input_year_opened)){
         $year_opened_err = "Please enter the year opened.";
     } elseif(!ctype_digit($input_year_opened)){
@@ -163,7 +163,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                         </div>
                         <div class="form-group">
                             <label>Year Opened</label>
-                            <input type="text" name="salary" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
+                            <input type="text" name="year_opened" class="form-control <?php echo (!empty($year_opened_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $year_opened; ?>">
                             <span class="invalid-feedback"><?php echo $year_opened_err;?></span>
                         </div>
                         <input type="hidden" name="id" value="<?php echo $id; ?>"/>
