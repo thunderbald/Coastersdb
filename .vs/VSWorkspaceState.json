@@ -2,11 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\PHP",
-    "\\PHP\\Coasters",
     "\\PHP\\Manufacturer",
     "\\PHP\\Parks",
     "\\SQL"
   ],
-  "SelectedNode": "\\PHP\\Parks\\create.php",
+  "SelectedNode": "\\SQL\\coastersdb.sql",
   "PreviewInSolutionExplorer": false
 }
