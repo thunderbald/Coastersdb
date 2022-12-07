@@ -17,7 +17,13 @@ $name_err = $location_err = $year_opened_err = $parkID_err = $num_coasters_err =
 // Processing form data when form is submitted
 if(isset($_POST["parkID"]) && !empty($_POST["parkID"])){
     // Get hidden input value
-    $parkID = $_POST["parkID"];
+    // Validate location
+    $input_parkID = trim($_POST["parkID"]);
+    if(empty($input_parkID)){
+        $location_err = "Please enter the Park ID.";
+    } else{
+        $ParkID= $input_ParkID;
+    }
 
     // Validate park name
     $input_park_name = trim($_POST["name"]);

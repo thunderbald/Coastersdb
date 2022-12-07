@@ -30,16 +30,16 @@ if(isset($_GET["coasterID"]) && !empty(trim($_GET["coasterID"]))){
                 /* Fetch result row as an associative array. Since the result set
                 contains only one row, we don't need to use while loop */
                 $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                //$coaster_name = $height = $speed = $coasterID = $Inversion_num = $year_opened  = $location = $parkID = $manufacturer = "";
+                //$coaster_name = $height_ft = $speed_mph = $coasterID = $Inversion_num = $year_opened  = $location = $park_ID = $manufacturer = "";
                 // Retrieve individual field value
                 $coasterID = $row["coasterID"];
                 $coaster_name = $row["coaster_name"];
-                $height = $row["height_ft"];
-                $speed = $row["speed_mph"];
+                $height_ft = $row["height_ft"];
+                $speed_mph = $row["speed_mph"];
                // $Inversion_num = $row["Inversion_num"];
                 $year_opened = $row["year_opened"];
                 $location = $row["location"];
-                $parkID = $row["park_ID"];
+                $park_ID = $row["park_ID"];
                 $manufacturer = $row["manufacturer"];
             } else{
                 // URL doesn't contain valid id parameter. Redirect to error page
@@ -77,7 +77,7 @@ if(isset($_GET["coasterID"]) && !empty(trim($_GET["coasterID"]))){
         }
     </style>
 </head>
-//$coaster_name = $height = $speed = $coasterID = $year_opened  = $location = $parkID = $manufacturer = "";
+
 <body>
     <div class="wrapper">
         <div class="container-fluid">

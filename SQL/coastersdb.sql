@@ -43,7 +43,7 @@ CREATE TABLE `coasters` (
 
 LOCK TABLES `coasters` WRITE;
 /*!40000 ALTER TABLE `coasters` DISABLE KEYS */;
-INSERT INTO `coasters` VALUES (1,'Banshee',167,68,2014,'Kings Island',1,'B&M'),(2,'Diamondback',230,80,2009,'Kings Island',1,'B&M'),(3,'Flight of Fear',74,54,1996,'Kings Island',1,'Premier Rides'),(4,'Mystic Timbers',109,53,2017,'Kings Island',1,'GCI'),(5,'Orion',287,91,2020,'Kings Island',1,'B&M'),(6,'Top Thrill Dragster',420,120,2003,'Cedar Point',2,'Intamin'),(7,'Valravn',223,75,2016,'Cedar Point',2,'B&M'),(8,'Corkscrew',85,48,1976,'Cedar Point',2,'Arrow'),(9,'Steel Vengeance',205,74,2018,'Cedar Point',2,'RMC'),(10,'GateKeeper',170,67,2013,'Cedar Point',2,'B&M'),(11,'Dominator',161,67,2000,'Kings Dominion',5,'B&M'),(12,'Flight of Fear',74,54,1996,'Kings Dominion',5,'Premier Rides'),(13,'Intimidator 305',305,90,2010,'Kings Dominion',5,'Intamin'),(14,'Twisted Timbers',112,54,2018,'Kings Dominion',5,'RMC'),(15,'Anaconda',128,50,1991,'Kings Dominion',5,'Arrow'),(16,'Fury 325',325,95,2015,'Carowinds',3,'B&M'),(17,'Afterburn',113,62,1999,'Carowinds',3,'B&M'),(18,'Intimidator',232,75,2010,'Carowinds',3,'B&M'),(19,'Carolina Cyclone',95,41,1980,'Carowinds',3,'Arrow'),(20,'Nighthawk',115,51,2004,'Carowinds',3,'Vekoma');
+INSERT INTO `coasters` VALUES (0,NULL,NULL,21,2000,'Huntington',NULL,'Sampsonite'),(1,'Banshee',167,68,2014,'Kings Island',1,'B&M'),(2,'Diamondback',230,80,2009,'Kings Island',1,'B&M'),(3,'Flight of Fear',74,54,1996,'Kings Island',1,'Premier Rides'),(4,'Mystic Timbers',109,53,2017,'Kings Island',1,'GCI'),(5,'Orion',287,91,2020,'Kings Island',1,'B&M'),(6,'Top Thrill Dragster',420,120,2003,'Cedar Point',2,'Intamin'),(7,'Valravn',223,75,2016,'Cedar Point',2,'B&M'),(8,'Corkscrew',85,48,1976,'Cedar Point',2,'Arrow'),(9,'Steel Vengeance',205,74,2018,'Cedar Point',2,'RMC'),(10,'GateKeeper',170,67,2013,'Cedar Point',2,'B&M'),(11,'Dominator',161,67,2000,'Kings Dominion',5,'B&M'),(12,'Flight of Fear',74,54,1996,'Kings Dominion',5,'Premier Rides'),(13,'Intimidator 305',305,90,2010,'Kings Dominion',5,'Intamin'),(14,'Twisted Timbers',112,54,2018,'Kings Dominion',5,'RMC'),(15,'Anaconda',128,50,1991,'Kings Dominion',5,'Arrow'),(16,'Fury 325',325,95,2015,'Carowinds',3,'B&M'),(17,'Afterburn',113,62,1999,'Carowinds',3,'B&M'),(18,'Intimidator',232,75,2010,'Carowinds',3,'B&M'),(19,'Carolina Cyclone',95,41,1980,'Carowinds',3,'Arrow'),(20,'Nighthawk',115,51,2004,'Carowinds',3,'Vekoma');
 /*!40000 ALTER TABLE `coasters` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -96,7 +96,7 @@ CREATE TABLE `parks` (
 
 LOCK TABLES `parks` WRITE;
 /*!40000 ALTER TABLE `parks` DISABLE KEYS */;
-INSERT INTO `parks` VALUES (1,'Kings Island','Mason',1972,11),(2,'Cedar Point','Sandusky',1870,17),(3,'Carowinds','Charlotte',1973,14),(4,'Camden Park','Huntington',1900,1),(5,'Kings Dominion','Doswell',1975,13),(6,'Six Flags','Atlanta',1970,58),(15,'Disney World','Orlando',1958,50),(20,'Kings Island','Cincinnati',1900,5);
+INSERT INTO `parks` VALUES (1,'Kings Island','Mason',1972,11),(2,'Cedar Point','Sandusky',1870,17),(3,'Carowinds','Charlotte',1973,14),(4,'Camden Park','Huntington',1900,1),(5,'Kings Dominion','Doswell',1975,13),(6,'Six Flags','Atlanta',1970,58),(9,'test','test',2000,4),(15,'Disney World','Orlando',1958,50),(20,'Kings Island','Cincinnati',1900,5);
 /*!40000 ALTER TABLE `parks` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,4 +134,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-02 10:47:57
+-- Dump completed on 2022-12-07  9:16:56

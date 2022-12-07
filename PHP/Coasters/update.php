@@ -11,7 +11,7 @@ session_start();
 require_once "../config.php";
  
 // Define variables and initialize with empty values
-$coaster_name = $height = $speed = $coasterID = $Inversion_num = $year_opened  = $location = $parkID = $manufacturer = "";
+$coaster_name = $height_ft = $speed_mph = $coasterID = $Inversion_num = $year_opened  = $location = $park_ID = $manufacturer = "";
 $coaster_name_err = $height_err = $speed_err = $coasterID_err = $Inversion_num_err = "";
 $year_opened_err = $location_err = $parkID_err = $manufacturer_err =  "";
  
@@ -35,7 +35,7 @@ if(isset($_POST["coasterID"]) && !empty($_POST["coasterID"])){
     if(empty($input_height)){
         $height_err = "Please enter coaster height.";
     } else{
-        $height = $input_height;
+        $height_ft = $input_height;
     }
 
     // Validate speed
@@ -45,7 +45,7 @@ if(isset($_POST["coasterID"]) && !empty($_POST["coasterID"])){
     } elseif(!ctype_digit($input_speed)){
         $speed_err = "Please enter a positive integer value.";
     } else{
-        $speed = $input_speed;
+        $speed_mph = $input_speed;
     }
     
 
@@ -70,7 +70,7 @@ if(isset($_POST["coasterID"]) && !empty($_POST["coasterID"])){
     if(empty($input_parkID)){
         $parkID_err = "Please enter the parkID.";
     } else{
-        $parkID = $input_parkID;
+        $park_ID = $input_parkID;
     }
     // Validate manufacturer
     $input_manufacturer = trim($_POST["manufacturer"]);
@@ -84,7 +84,7 @@ if(isset($_POST["coasterID"]) && !empty($_POST["coasterID"])){
     if(eempty($coaster_name_err) && empty($height_err) && empty($speed_err) && empty($coasterID_err)
         && empty($Inversion_num_err) && empty($year_opened_err) && empty($location_err) && empty($parkID_err) && empty($manufacturer_err)){
         // Prepare an update statement
-        $sql = "UPDATE coasters SET coaster_name=?, height=?, speed =?, year_opened=?, location = ?, parkID = ?, manufacturer = ? WHERE coasterID=?";
+        $sql = "UPDATE coasters SET coaster_name=?, height_ft=?, speed_mph =?, year_opened=?, location = ?, park_ID = ?, manufacturer = ? WHERE coasterID=?";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -93,13 +93,13 @@ if(isset($_POST["coasterID"]) && !empty($_POST["coasterID"])){
             
             // Set parameters
             $param_name = $coaster_name;
-            $param_height = $height;
-            $param_speed = $speed;
+            $param_height = $height_ft;
+            $param_speed = $speed_mph;
             $param_coasterID = $coasterID;
             
             $param_year_opened = $year_opened;
             $param_location = $location;
-            $param_parkID = $parkID;
+            $param_parkID = $park_ID;
             $param_manufacturer = $manufacturer;
             
             // Attempt to execute the prepared statement
@@ -145,12 +145,12 @@ if(isset($_POST["coasterID"]) && !empty($_POST["coasterID"])){
                     // Retrieve individual field value
                     $coasterID = $row["coasterID"];
                     $coaster_name = $row["coaster_name"];
-                    $height = $row["height_ft"];
-                    $speed = $row["speed_mph"];
+                    $height_ft = $row["height_ft"];
+                    $speed_mph = $row["speed_mph"];
                     
                     $year_opened = $row["year_opened"];
                     $location = $row["location"];
-                    $parkID = $row["park_ID"];
+                    $park_ID = $row["park_ID"];
                     $manufacturer = $row["manufacturer"];
                 } else{
                     // URL doesn't contain valid id. Redirect to error page
@@ -210,12 +210,12 @@ if(isset($_POST["coasterID"]) && !empty($_POST["coasterID"])){
                         </div>
                         <div class="form-group">
                             <label>Height</label>
-                            <textarea name="height_ft" class="form-control <?php echo (!empty($height_err)) ? 'is-invalid' : ''; ?>"><?php echo $height; ?></textarea>
+                            <textarea name="height_ft" class="form-control <?php echo (!empty($height_err)) ? 'is-invalid' : ''; ?>"><?php echo $height_ft; ?></textarea>
                             <span class="invalid-feedback"><?php echo $height_err;?></span>
                         </div>
                         <div class="form-group">
                             <label>Speed</label>
-                            <input type="text" name="speed_mph" class="form-control <?php echo (!empty($speed_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $speed; ?>">
+                            <input type="text" name="speed_mph" class="form-control <?php echo (!empty($speed_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $speed_mph; ?>">
                             <span class="invalid-feedback"><?php echo $speed_err;?></span>
                         </div>
                        
@@ -231,7 +231,7 @@ if(isset($_POST["coasterID"]) && !empty($_POST["coasterID"])){
                         </div>
                         <div class="form-group">
                             <label>Park ID</label>
-                            <input type="text" name="park_ID" class="form-control <?php echo (!empty($parkID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $parkID; ?>">
+                            <input type="text" name="park_ID" class="form-control <?php echo (!empty($parkID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $park_ID; ?>">
                             <span class="invalid-feedback"><?php echo $parkID_err;?></span>
                         </div>
                         <div class="form-group">
